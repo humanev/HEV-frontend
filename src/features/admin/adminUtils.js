@@ -1,0 +1,129 @@
+import {Mic2, Video, BookOpen, Users, BarChart3, Settings, FileText, Inbox, Mail, ShieldCheck, Activity, CalendarDays} from "lucide-react";
+import {readLegacyContactMessage} from "../../contactMetadata";
+import {normalizePagePlacements, pagePlacementOptions, relatedPageOptions} from "../navigation/sitePages";
+
+export const emptyArticle = {
+  category: "MARKET",
+  title: "",
+  excerpt: "",
+  body: "",
+  author: "Editorial Desk",
+  readTime: "5 min read",
+  image: "",
+  placements: "[]",
+  status: "draft",
+  accessLevel: "free"
+};
+
+export const articleCategories = ["CARS", "TWO WHEELERS", "BUSES", "BATTERY", "CHARGING", "POLICY", "STARTUPS"];
+
+export const managedTypes = {
+  podcasts: { kind: "podcast", label: "Podcast", icon: Mic2 },
+  videos: { kind: "video", label: "Video", icon: Video },
+  magazine: { kind: "magazine", label: "Magazine", icon: BookOpen },
+  cxos: { kind: "cxo", label: "Person", icon: Users }
+};
+
+export const tabs = [
+  { id: "overview", label: "Dashboard", icon: BarChart3, roles: ["owner", "editor", "publisher", "support"] },
+  { id: "content", label: "Dynamic content", icon: FileText, roles: ["owner", "editor", "publisher"] },
+  { id: "site-content", label: "Static content", icon: Settings, roles: ["owner"] },
+  { id: "articles", label: "Articles & news", icon: FileText, roles: ["owner", "editor", "publisher"] },
+  { id: "podcasts", ...managedTypes.podcasts, label: "Podcasts", roles: ["owner", "editor", "publisher"] },
+  { id: "videos", ...managedTypes.videos, label: "Videos", roles: ["owner", "editor", "publisher"] },
+  { id: "magazine", ...managedTypes.magazine, label: "Magazine", roles: ["owner", "editor", "publisher"] },
+  { id: "cxos", ...managedTypes.cxos, label: "People", roles: ["owner", "editor", "publisher"] },
+  { id: "enquiries", label: "Enquiries", icon: Inbox, roles: ["owner", "support"] },
+  { id: "newsletter", label: "Newsletter", icon: Mail, roles: ["owner", "support"] },
+  { id: "team", label: "Admin settings", icon: Users, roles: ["owner"] },
+  { id: "profile", label: "Profile & security", icon: ShieldCheck, roles: ["owner", "editor", "publisher", "support"] }
+];
+
+export const adminMenuGroups = [
+  { label: "Workspace", ids: ["overview"] },
+  { label: "Dynamic content", ids: ["content", "articles", "podcasts", "videos", "magazine", "cxos"] },
+  { label: "Static content", ids: ["site-content"] },
+  { label: "Support", ids: ["enquiries", "newsletter"] },
+  { label: "Administration", ids: ["team", "profile"] }
+];
+
+export const adminRoleLabels = { owner: "Admin", editor: "Editor", publisher: "Publisher", support: "Supporter" };
+
+export const websitePlacements = pagePlacementOptions;
+export {normalizePagePlacements, relatedPageOptions};
+
+export function readJsonList(value) {
+  try {
+    const parsed = JSON.parse(value || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+export const siteContentSections = [
+  { id: "navigation", label: "Website navigation", description: "Add and edit the links visitors see in the main website menu.", type: "navigation" },
+  { id: "homeStats", label: "Home page stats", description: "Numbers displayed in the home-page market dashboard.", fields: ["Label", "Value", "Change"] },
+  { id: "directory", label: "Company directory", description: "Companies shown in the Startup Hub and company directory.", fields: ["Company", "Sector", "Location", "Stage"] },
+  { id: "events", label: "Events", description: "Upcoming events shown on the events page. Assign an event to other pages to reuse the shared event card.", fields: ["Event name", "Location", "Date", "Type", "Source / registration URL", "Show on additional pages"], optionalFields: [4, 5] },
+  { id: "reports", label: "Research reports", description: "Report cards shown in Intelligence and Research.", fields: ["Report title", "Category", "Access label"] },
+  { id: "plans", label: "Membership plans", description: "Plan names, display prices, descriptions, and listed benefits.", type: "plans" },
+  { id: "dashboardData", label: "Dashboard metrics", description: "Metric cards shown on the intelligence dashboard.", fields: ["Metric", "Value", "Change"] },
+  { id: "investorDeals", label: "Investor deals", description: "Funding headlines and amounts shown in Investors Hub.", fields: ["Deal headline", "Amount", "Date label"] },
+  { id: "peopleVoices", label: "People highlights", description: "Featured executive-conversation cards on the People page.", fields: ["Role", "Initials", "Headline"] },
+  { id: "learningCourses", label: "Learning courses", description: "Course titles shown in the Learning Centre.", type: "strings" },
+  { id: "communityFeatures", label: "Community features", description: "Feature cards shown on the Community page.", fields: ["Feature name", "Description"] },
+  { id: "homeCapabilities", label: "Home page feature cards", description: "Home-only content areas displayed on the home page. Use a supported icon name such as Newspaper, BarChart3, CarFront, BriefcaseBusiness, Zap, Users, Clapperboard, CalendarDays, or Handshake.", fields: ["Card title", "Description", "Internal link", "Icon"] }
+];
+
+export function getEnquiryDisplay(enquiry) {
+  const legacy = readLegacyContactMessage(enquiry.message);
+  return {
+    ...enquiry,
+    type: legacy?.type || enquiry.type,
+    message: legacy?.message ?? enquiry.message,
+    phone: enquiry.phone || legacy?.phone || "",
+    jobTitle: enquiry.jobTitle || legacy?.jobTitle || "",
+    website: enquiry.website || legacy?.website || "",
+    preferredContact: enquiry.preferredContact || legacy?.preferredContact || "",
+    magazineIssue: enquiry.magazineIssue || legacy?.magazineIssue || "",
+    magazineFormat: enquiry.magazineFormat || legacy?.magazineFormat || "",
+    magazineBudget: enquiry.magazineBudget || legacy?.magazineBudget || ""
+  };
+}
+
+export function emptyManagedContent(kind) {
+  return {
+    title: "",
+    description: "",
+    body: "",
+    personName: "",
+    role: "",
+    organization: "",
+    duration: "",
+    issueLabel: "",
+    image: "",
+    mediaUrl: "",
+    slug: "",
+    category: "",
+    series: "",
+    tags: "",
+    placements: "[]",
+    relatedContent: "[]",
+    featured: false,
+    publicationAt: "",
+    seoTitle: "",
+    metaDescription: "",
+    canonicalUrl: "",
+    status: "draft",
+    accessLevel: "free",
+    kind
+  };
+}
+
+export function displayDate(value) {
+  return new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  }).format(new Date(`${value.replace(" ", "T")}Z`));
+}
