@@ -16,3 +16,21 @@
 .managed-media-card h3{font-family:"Playfair Display";font-size:21px;line-height:1.25;margin:8px 0}
 .managed-media-card p{font-size:11px;line-height:1.6;color:var(--muted)}
 .managed-audio-player{display:block;width:100%;margin:0 0 8px;border-radius:8px}
+.hev-media-nav{display:flex;flex-wrap:wrap;gap:10px;padding-top:24px;padding-bottom:24px}
+.hev-media-nav a{display:inline-flex;min-height:42px;align-items:center;gap:8px;padding:0 15px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-size:11px;font-weight:800}
+.hev-media-nav a:hover{border-color:var(--green);color:var(--green2)}
+.hev-media-section{scroll-margin-top:90px}
+.hev-media-section-muted{background:var(--soft)}
+.hev-media-description{max-width:680px;margin:-16px 0 25px;color:var(--muted);font-size:12px;line-height:1.7}
+.hev-media-empty{display:flex;min-height:112px;align-items:center;gap:14px;padding:20px;border:1px dashed var(--line);border-radius:10px;color:var(--muted)}
+.hev-media-empty p{flex:1;margin:0;font-size:12px;line-height:1.6}
+.hev-media-empty>a{display:inline-flex;align-items:center;gap:5px;color:var(--green2);font-size:11px;font-weight:800}
+.hev-green-route{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:30px;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;background:var(--bg)}
+.hev-green-route h2{margin:8px 0;font-family:"Playfair Display",Georgia,serif;font-size:clamp(28px,4vw,38px);line-height:1.15}
+.hev-green-route p{max-width:620px;margin:0;color:var(--muted);font-size:12px;line-height:1.7}
+.hev-green-route-links{display:flex;flex-wrap:wrap;gap:10px;flex:none}
+.hev-green-route-links a{display:inline-flex;align-items:center;gap:6px}
+.dark .hev-media-nav a{background:#102027;border-color:#26393f}
+.dark .hev-media-section-muted{background:#0a171d}
+.dark .hev-green-route{background:#102027;border-color:#26393f;border-left-color:var(--green)}
+@media (max-width:700px){.hev-media-nav{gap:7px}.hev-media-nav a{min-height:38px;padding:0 11px;font-size:10px}.hev-media-empty{align-items:flex-start;flex-wrap:wrap}.hev-media-empty p{flex-basis:calc(100% - 44px)}.hev-media-empty>a{margin-left:42px}.hev-green-route{align-items:flex-start;flex-direction:column;padding:22px}.hev-green-route-links{flex-direction:column;align-items:flex-start}}

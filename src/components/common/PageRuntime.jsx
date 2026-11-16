@@ -14,8 +14,9 @@ export function useSiteContent(){ return React.useContext(SiteContentContext); }
 function assignedToPlacement(item, placement){
  if(!placement)return true;
  try{
-  const placements=normalizePagePlacements(item.placements);
-  return placements.length===0||placements.includes(placement);
+  const itemPlacements=normalizePagePlacements(item.placements);
+  const requestedPlacements=Array.isArray(placement)?placement:[placement];
+  return itemPlacements.length===0||requestedPlacements.some((value)=>itemPlacements.includes(value));
  }catch{return false}
 }
 export function useArticles(placement){
